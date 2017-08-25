@@ -17,18 +17,18 @@ class TestSharedCanvas(unittest.TestCase):
 		if 'Location' in response.headers:
 			location = response.headers['Location']
 #		print(code, location)
-		self.assertEqual(code, 302, 'Failed to get redirected to %s due to %s' % (source, code))
+		self.assertEqual(code, 301, 'Failed to get redirected to %s due to %s' % (source, code))
 		self.assertEqual(location, target, 'Failed to redirect to the correct place. Expected %s but got %s' % (target, location))
 
 
 	def test_root(self):
 		url = '%s/%s' % (self.baseurl, '')
-		dest = '%s/%s' % (self.baseurl, '/api/model/')
+		dest = 'http://iiif.io/model/'
 		self.checkRedirect(url, dest)
 
 	def test_index(self):
 		url = '%s/%s' % (self.baseurl, 'index.html')
-		dest = '%s/%s' % (self.baseurl, '/api/model/')
+		dest = 'http://iiif.io/model/'
 		self.checkRedirect(url, dest)
 	
 if __name__ == '__main__':

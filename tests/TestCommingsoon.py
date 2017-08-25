@@ -23,12 +23,12 @@ class TestCommingsoon(unittest.TestCase):
 
 	def test_example(self):
 		url = '%s/%s' % (self.baseurl, 'api/image/2.0/example/reference/67352ccc-d1b0-11e1-89ae-279075081939/info.json')
-		dest = '%s/%s' % (self.baseurl, 'commingsoon.html')
+		dest = '%s/%s' % (self.baseurl, 'comingsoon/')
 		self.checkRedirect(url, dest, 'iiif.io')
 
 	def test_index(self):
 		url = '%s/%s' % (self.baseurl, 'shims/wales/potter/1861-01-02.json')
-		dest = '%s/%s' % (self.baseurl, 'commingsoon.html')
+		dest = '%s/%s' % (self.baseurl, 'comingsoon/')
 		self.checkRedirect(url, dest, 'showcase.iiif.io')
 	
 if __name__ == '__main__':
