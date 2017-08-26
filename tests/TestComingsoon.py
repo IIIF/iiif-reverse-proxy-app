@@ -4,7 +4,7 @@ import os
 import sys
 import requests
 
-class TestCommingsoon(unittest.TestCase):
+class TestComingsoon(unittest.TestCase):
 	baseurl = ''
 	def setUp(self):
 		self.baseurl = os.environ["baseurl"].replace('localhost','0.0.0.0')
