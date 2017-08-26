@@ -24,7 +24,7 @@ class TestCommingsoon(unittest.TestCase):
 	def test_example(self):
 		url = '%s/%s' % (self.baseurl, 'api/image/2.0/example/reference/67352ccc-d1b0-11e1-89ae-279075081939/info.json')
 		dest = '%s/%s' % (self.baseurl, 'comingsoon/')
-		self.checkRedirect(url, dest, 'iiif.io')
+		self.checkRedirect(url, dest,'0.0.0.0')
 
 if __name__ == '__main__':
 	baseurl = 'http://localhost:5000'
