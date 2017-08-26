@@ -3,7 +3,6 @@ import unittest
 import TestJsonLD
 import TestProxy
 import TestRedirect
-import TestSharedCanvas
 import TestCommingsoon
 import TestValidators
 import os
@@ -14,7 +13,6 @@ def suite():
 	tests.append(unittest.TestLoader().loadTestsFromTestCase(TestJsonLD.TestJsonLD))
 	tests.append(unittest.TestLoader().loadTestsFromTestCase(TestProxy.TestProxy))
 	tests.append(unittest.TestLoader().loadTestsFromTestCase(TestRedirect.TestRedirect))
-	tests.append(unittest.TestLoader().loadTestsFromTestCase(TestSharedCanvas.TestSharedCanvas))
 	tests.append(unittest.TestLoader().loadTestsFromTestCase(TestCommingsoon.TestCommingsoon))
 	tests.append(unittest.TestLoader().loadTestsFromTestCase(TestValidators.TestValidators))
 	return  unittest.TestSuite(tests)

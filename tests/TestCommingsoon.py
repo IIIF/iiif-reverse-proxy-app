@@ -26,11 +26,6 @@ class TestCommingsoon(unittest.TestCase):
 		dest = '%s/%s' % (self.baseurl, 'comingsoon/')
 		self.checkRedirect(url, dest, 'iiif.io')
 
-	def test_index(self):
-		url = '%s/%s' % (self.baseurl, 'shims/wales/potter/1861-01-02.json')
-		dest = '%s/%s' % (self.baseurl, 'comingsoon/')
-		self.checkRedirect(url, dest, 'showcase.iiif.io')
-	
 if __name__ == '__main__':
 	baseurl = 'http://localhost:5000'
 	if len(sys.argv) == 2:
