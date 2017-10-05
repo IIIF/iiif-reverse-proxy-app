@@ -1,6 +1,9 @@
 #!/usr/local/bin/python3.5
 import unittest
-from urllib.request import urlopen
+try:
+    from urllib.request import urlopen
+except ImportError:
+    from urllib2 import urlopen
 from urllib import request
 import os
 
