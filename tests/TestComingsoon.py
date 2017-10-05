@@ -6,12 +6,14 @@ import requests
 
 class TestComingsoon(unittest.TestCase):
 	baseurl = ''
+	desturl = ''
 	def setUp(self):
-		self.baseurl = os.environ["baseurl"].replace('localhost','0.0.0.0')
+		self.baseurl = os.environ["baseurl"]
+		self.desturl = os.environ["desturl"]
 
-	def checkRedirect(self, source, target, host):	
+	def checkRedirect(self, source, target, host):
 		code = 0
-		response = requests.get(source, allow_redirects=False, headers={'host': host})
+		response = requests.get(source, allow_redirects=False)
 		code = response.status_code
 		location = source
 		if 'Location' in response.headers:
@@ -23,7 +25,7 @@ class TestComingsoon(unittest.TestCase):
 
 	def test_example(self):
 		url = '%s/%s' % (self.baseurl, 'api/image/2.0/example/reference/67352ccc-d1b0-11e1-89ae-279075081939/info.json')
-		dest = '%s/%s' % (self.baseurl, 'comingsoon/')
+		dest = '%s/%s' % (self.desturl, 'comingsoon/')
 		self.checkRedirect(url, dest,'0.0.0.0')
 
 if __name__ == '__main__':
@@ -31,7 +33,7 @@ if __name__ == '__main__':
 	if len(sys.argv) == 2:
 		baseurl = sys.argv[1]
 
-	os.environ["baseurl"] = baseurl	
+	os.environ["baseurl"] = baseurl
 
 
 	unittest.main()

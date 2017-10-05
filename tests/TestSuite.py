@@ -1,31 +1,42 @@
-#!/usr/local/bin/python3.5
+#!/usr/local/bin/python3
 import unittest
 import TestJsonLD
 import TestProxy
 import TestRedirect
 import TestComingsoon
+import TestRDFXML
 import TestValidators
 import TestIE
+import TestPrezi3
 import os
 import sys
 
 def suite():
-	tests = []
-	tests.append(unittest.TestLoader().loadTestsFromTestCase(TestJsonLD.TestJsonLD))
-	tests.append(unittest.TestLoader().loadTestsFromTestCase(TestProxy.TestProxy))
-	tests.append(unittest.TestLoader().loadTestsFromTestCase(TestRedirect.TestRedirect))
-	tests.append(unittest.TestLoader().loadTestsFromTestCase(TestComingsoon.TestComingsoon))
-	tests.append(unittest.TestLoader().loadTestsFromTestCase(TestValidators.TestValidators))
-	tests.append(unittest.TestLoader().loadTestsFromTestCase(TestIE.TestIE))
-	return  unittest.TestSuite(tests)
+    tests = []
+    tests.append(unittest.TestLoader().loadTestsFromTestCase(TestJsonLD.TestJsonLD))
+    tests.append(unittest.TestLoader().loadTestsFromTestCase(TestProxy.TestProxy))
+    tests.append(unittest.TestLoader().loadTestsFromTestCase(TestRedirect.TestRedirect))
+    tests.append(unittest.TestLoader().loadTestsFromTestCase(TestComingsoon.TestComingsoon))
+    tests.append(unittest.TestLoader().loadTestsFromTestCase(TestValidators.TestValidators))
+    tests.append(unittest.TestLoader().loadTestsFromTestCase(TestIE.TestIE))
+    tests.append(unittest.TestLoader().loadTestsFromTestCase(TestRDFXML.TestRDFXML))
+    tests.append(unittest.TestLoader().loadTestsFromTestCase(TestPrezi3.TestPrezi3))
+    return  unittest.TestSuite(tests)
 
-baseurl = 'http://localhost:5000'
-if len(sys.argv) == 2:
-	baseurl = sys.argv[1]
+if __name__ == '__main__':
+    baseurl = 'http://localhost:5000'
+    desturl = baseurl
+    if len(sys.argv) > 1:
+        baseurl = sys.argv[1]
+        desturl = baseurl
+        if len(sys.argv) > 2:
+            desturl = sys.argv[2]
 
-os.environ["baseurl"] = baseurl	
+    os.environ["baseurl"] = baseurl
+    os.environ["desturl"] = desturl
 
-mySuit=suite()
+    mySuit=suite()
 
-runner=unittest.TextTestRunner()
-runner.run(mySuit)
+    runner=unittest.TextTestRunner()
+    runner.run(mySuit)
+    print('TEST')
