@@ -3,6 +3,10 @@ import unittest
 import os
 import sys
 import requests
+try:
+    import urlparse
+except:
+    from urllib.parse import urlparse
 
 class TestRedirect(unittest.TestCase):
     baseurl = ''
@@ -20,6 +24,8 @@ class TestRedirect(unittest.TestCase):
             location = response.headers['Location']
     #		print(code, location)
         self.assertEqual(code, 302, 'Failed to get redirected to %s due to %s' % (source, code))
+        location = urlparse(location).path
+        target = urlparse(target).path
         self.assertEqual(location, target, 'Failed to redirect to the correct place. Expected %s but got %s' % (target, location))
 
 

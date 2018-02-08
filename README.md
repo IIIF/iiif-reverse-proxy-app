@@ -8,6 +8,9 @@ reverse proxy to S3 buckets serving static content.
 Start nginx and run:
 ```./tests/TestSuite.py```
 
+## Runnning docker:
+```docker build -t proxy . && docker run --rm --name proxy -p 9001:80 proxy:latest```
+
 ## Config files
 
 Anything in .ebextensions/nginx/conf.d/ directory is in the http part of the nginx config.
