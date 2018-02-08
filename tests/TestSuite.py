@@ -8,6 +8,7 @@ import TestRDFXML
 import TestValidators
 import TestIE
 import TestPrezi3
+import TestImageAPI
 import os
 import sys
 
@@ -16,11 +17,11 @@ def suite():
     tests.append(unittest.TestLoader().loadTestsFromTestCase(TestJsonLD.TestJsonLD))
     tests.append(unittest.TestLoader().loadTestsFromTestCase(TestProxy.TestProxy))
     tests.append(unittest.TestLoader().loadTestsFromTestCase(TestRedirect.TestRedirect))
-    tests.append(unittest.TestLoader().loadTestsFromTestCase(TestComingsoon.TestComingsoon))
     tests.append(unittest.TestLoader().loadTestsFromTestCase(TestValidators.TestValidators))
     tests.append(unittest.TestLoader().loadTestsFromTestCase(TestIE.TestIE))
     tests.append(unittest.TestLoader().loadTestsFromTestCase(TestRDFXML.TestRDFXML))
     tests.append(unittest.TestLoader().loadTestsFromTestCase(TestPrezi3.TestPrezi3))
+    tests.append(unittest.TestLoader().loadTestsFromTestCase(TestImageAPI.TestImageAPI))
     return  unittest.TestSuite(tests)
 
 if __name__ == '__main__':
