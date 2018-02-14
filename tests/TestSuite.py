@@ -25,7 +25,7 @@ def suite():
     return  unittest.TestSuite(tests)
 
 if __name__ == '__main__':
-    baseurl = 'http://localhost:5000'
+    baseurl = 'http://localhost:9001'
     desturl = baseurl
     if len(sys.argv) > 1:
         baseurl = sys.argv[1]
