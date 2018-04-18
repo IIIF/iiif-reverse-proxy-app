@@ -24,21 +24,22 @@ class TestPrezi3(unittest.TestCase):
         location = url
         if 'Location' in response.headers:
             location = response.headers['Location']
-        self.assertEqual(code, 302, 'Failed to get redirected to %s due to %s' % (url, code))
+        self.assertEqual(code, 301, 'Failed to get redirected to %s due to %s' % (url, code))
         self.assertEqual(location, target, 'Failed to redirect to the correct place. Expected %s but got %s' % (target, location))
 
     def test_prezi3(self):
         url = '%s/%s' % (self.baseurl, 'api/presentation/3.0/')
-        self.checkOK(url, 'prezi3.iiif.io')
+        target = 'http://iiif.io/api/presentation/3.0/'
+        self.redirectCheck(url, target)
 
     def test_apiredirect(self):
         url = '%s/%s' % (self.baseurl, '')
-        target = 'http://prezi3.iiif.io/api/index.html'
+        target = 'http://iiif.io/'
         self.redirectCheck(url, target)
 
     def test_presentationMissingslash(self):
         url = '%s/%s' % (self.baseurl, 'api/presentation/3.0')
-        target = 'http://prezi3.iiif.io/api/presentation/3.0/'
+        target = 'http://iiif.io/api/presentation/3.0'
         self.redirectCheck(url, target)
 
 if __name__ == '__main__':
