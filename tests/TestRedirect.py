@@ -15,7 +15,7 @@ class TestRedirect(unittest.TestCase):
         self.baseurl = os.environ["baseurl"]
         self.desturl = os.environ["desturl"]
 
-    def checkRedirect(self, source, target):
+    def checkRedirect(self, source, target, enforceHost=False):
         code = 0
         response = requests.get(source, allow_redirects=False)
         code = response.status_code
@@ -24,9 +24,17 @@ class TestRedirect(unittest.TestCase):
             location = response.headers['Location']
     #		print(code, location)
         self.assertEqual(code, 302, 'Failed to get redirected to %s due to %s' % (source, code))
-        location = urlparse(location).path
-        target = urlparse(target).path
-        self.assertEqual(location, target, 'Failed to redirect to the correct place. Expected %s but got %s' % (target, location))
+        locationPath = urlparse(location).path
+        targetPath = urlparse(target).path
+        self.assertEqual(locationPath, targetPath, 'Failed to redirect to the correct place. Expected %s but got %s' % (targetPath, locationPath))
+        if enforceHost:
+            sourceHost=urlparse(location).hostname
+            targetHost=urlparse(target).hostname
+            self.assertEqual(sourceHost, targetHost, 'Failed to redirect to the correct host. Expected %s but got %s' % (targetHost,sourceHost))
+            sourceScheme = urlparse(location).scheme
+            targetScheme = urlparse(target).scheme
+            self.assertEqual(sourceScheme, targetScheme, 'Failed to redirect using the correct protocol.')
+
 
 
     def test_image(self):
@@ -67,6 +75,10 @@ class TestRedirect(unittest.TestCase):
         url = '%s/%s' % (self.baseurl, '/api/search')
         dest = '%s/%s' % (self.desturl, 'api/search/1.0/')
         self.checkRedirect(url, dest)
+    def test_api_redirect(self):
+        url = '%s/%s' % (self.baseurl, 'api/image/')
+        dest = '%s/%s' % ('https://iiif.io', 'api/image/2.1/')
+        self.checkRedirect(url, dest, True)
 
 
 if __name__ == '__main__':
