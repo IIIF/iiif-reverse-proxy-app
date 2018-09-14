@@ -13,4 +13,4 @@ before_install:
   - docker run -d --rm --name proxy -p 9001:80 proxy:latest
 
 script:
-  - ./tests/TestSuite.py
+  - python $TRAVIS_BUILD_DIR/tests/TestSuite.py
