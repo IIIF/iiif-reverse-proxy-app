@@ -11,7 +11,7 @@ class TestHttps(unittest.TestCase):
     def test_redirect(self):
         url = "%s/%s" % (self.baseurl, 'index.html')
 
-        headers = {'X-Forwarded-Proto': 'http'}
+        headers = {'CloudFront-Forwarded-Proto': 'http'}
         response = requests.get(url, headers=headers, allow_redirects=False)
         code = response.status_code
         self.assertEqual(code,301, 'Failed to redirect from http to https got code %s from URL %s' % (code, url))
@@ -25,7 +25,7 @@ class TestHttps(unittest.TestCase):
 
     def test_noredirect(self):
         url = self.baseurl
-        headers = {'X-Forwarded-Proto': 'https'}
+        headers = {'CloudFront-Forwarded-Proto': 'https'}
         response = requests.get(url, headers=headers, allow_redirects=False)
 
         code = response.status_code
