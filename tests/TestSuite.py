@@ -9,6 +9,7 @@ import TestValidators
 import TestIE
 import TestPrezi3
 import TestImageAPI
+import TestHttps
 import os
 import sys
 
@@ -21,6 +22,7 @@ def suite():
     tests.append(unittest.TestLoader().loadTestsFromTestCase(TestIE.TestIE))
     tests.append(unittest.TestLoader().loadTestsFromTestCase(TestRDFXML.TestRDFXML))
     tests.append(unittest.TestLoader().loadTestsFromTestCase(TestPrezi3.TestPrezi3))
+    tests.append(unittest.TestLoader().loadTestsFromTestCase(TestHttps.TestHttps))
     tests.append(unittest.TestLoader().loadTestsFromTestCase(TestImageAPI.TestImageAPI))
     return  unittest.TestSuite(tests)
 

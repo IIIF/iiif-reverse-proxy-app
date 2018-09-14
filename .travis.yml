@@ -1,0 +1,16 @@
+sudo: false
+dist: trusty
+
+language: python
+python:
+  - "3.5"
+
+services:
+  - docker
+
+before_install:
+  - docker build -t proxy .
+  - docker run -d --rm --name proxy -p 9001:80 proxy:latest
+
+script:
+  - python $TRAVIS_BUILD_DIR/tests/TestSuite.py
