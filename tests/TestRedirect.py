@@ -36,6 +36,10 @@ class TestRedirect(unittest.TestCase):
             self.assertEqual(sourceScheme, targetScheme, 'Failed to redirect using the correct protocol.')
 
 
+    def test_api(self):
+        url = '%s/%s' % (self.baseurl, 'api')
+        dest = '%s/%s' % ('https://iiif.io', 'api/index.html')
+        self.checkRedirect(url, dest, True)
 
     def test_image(self):
         url = '%s/%s' % (self.baseurl, 'api/image/')
