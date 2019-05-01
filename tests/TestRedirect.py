@@ -23,7 +23,7 @@ class TestRedirect(unittest.TestCase):
         if 'Location' in response.headers:
             location = response.headers['Location']
     #		print(code, location)
-        self.assertEqual(code, 302, 'Failed to get redirected to %s due to %s' % (source, code))
+        self.assertEqual(code, 302, 'Failed to get redirected to %s from %s, recieved code: %s' % (target, source, code))
         locationPath = urlparse(location).path
         targetPath = urlparse(target).path
         self.assertEqual(locationPath, targetPath, 'Failed to redirect to the correct place. Expected %s but got %s' % (targetPath, locationPath))
@@ -84,6 +84,15 @@ class TestRedirect(unittest.TestCase):
         dest = '%s/%s' % ('https://iiif.io', 'api/image/2.1/')
         self.checkRedirect(url, dest, True)
 
+    def test_editor_policy(self):
+        url = '%s/%s' % (self.baseurl, 'api/annex/notes/editors/')
+        dest = '%s/%s' % (self.desturl, 'community/policy/editorial/')
+        self.checkRedirect(url, dest)
+
+    def test_editor_policy_index(self):
+        url = '%s/%s' % (self.baseurl, 'api/annex/notes/editors/index.html')
+        dest = '%s/%s' % (self.desturl, 'community/policy/editorial/')
+        self.checkRedirect(url, dest)
 
 if __name__ == '__main__':
     baseurl = 'http://localhost:5000'
