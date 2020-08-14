@@ -43,12 +43,12 @@ class TestRedirect(unittest.TestCase):
 
     def test_image(self):
         url = '%s/%s' % (self.baseurl, 'api/image/')
-        dest = '%s/%s' % (self.desturl, 'api/image/2.1/')
+        dest = '%s/%s' % (self.desturl, 'api/image/3.0/')
         self.checkRedirect(url, dest)
 
     def test_presentation(self):
         url = '%s/%s' % (self.baseurl, 'api/presentation/index.html')
-        dest = '%s/%s' % (self.desturl, 'api/presentation/2.1/')
+        dest = '%s/%s' % (self.desturl, 'api/presentation/3.0/')
         self.checkRedirect(url, dest)
     def test_validator(self):
         url = '%s/%s' % (self.baseurl, 'api/presentation/validator')
@@ -81,7 +81,7 @@ class TestRedirect(unittest.TestCase):
         self.checkRedirect(url, dest)
     def test_api_redirect(self):
         url = '%s/%s' % (self.baseurl, 'api/image/')
-        dest = '%s/%s' % ('https://iiif.io', 'api/image/2.1/')
+        dest = '%s/%s' % ('https://iiif.io', 'api/image/3.0/')
         self.checkRedirect(url, dest, True)
 
     def test_editor_policy(self):
