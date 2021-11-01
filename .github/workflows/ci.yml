@@ -13,6 +13,14 @@ jobs:
         with:
           python-version: '3.x' # Version range or exact version of a Python version to use, using SemVer's version range syntax
 
+      - uses: actions/cache@v2
+        with:
+          path: ${{ env.pythonLocation }}
+          key: ${{ env.pythonLocation }}-${{ hashFiles('setup.py') }}-${{ hashFiles('requirements.txt') }}    
+
+      - name: Install requirements
+       run: pip install --upgrade --upgrade-strategy eager -r requirements.txt -e .    
+
       - name: Building proxy
         run: docker build -t proxy .
 
