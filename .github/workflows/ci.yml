@@ -1,0 +1,26 @@
+name: CI
+
+on: [push]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v2
+
+      - name: Setup python
+      - uses: actions/setup-python@v2
+        with:
+          python-version: '3.x' # Version range or exact version of a Python version to use, using SemVer's version range syntax
+
+      - name: Building proxy
+        run: docker build -t proxy .
+
+      - name: Running Proxy
+        run:  docker run -d --rm --name proxy -p 9001:80 proxy:latest
+
+        # Due to the way docker-compose and SOLR works we can't access the SOLR cloud
+        # from this machine. Instead we have to run the test within the cluster
+      - name: Run Tests
+        run: python ./tests/TestSuite.py
