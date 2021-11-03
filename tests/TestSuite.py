@@ -10,6 +10,7 @@ import TestIE
 import TestPrezi3
 import TestImageAPI
 import TestHttps
+import TestCORS
 import os
 import sys
 
@@ -24,6 +25,7 @@ def suite():
     tests.append(unittest.TestLoader().loadTestsFromTestCase(TestPrezi3.TestPrezi3))
     tests.append(unittest.TestLoader().loadTestsFromTestCase(TestHttps.TestHttps))
     tests.append(unittest.TestLoader().loadTestsFromTestCase(TestImageAPI.TestImageAPI))
+    tests.append(unittest.TestLoader().loadTestsFromTestCase(TestCORS.TestCORS))
     return  unittest.TestSuite(tests)
 
 if __name__ == '__main__':
@@ -41,5 +43,10 @@ if __name__ == '__main__':
     mySuit=suite()
 
     runner=unittest.TextTestRunner()
-    runner.run(mySuit)
-    print('TEST')
+    result = runner.run(mySuit)
+
+    if result.wasSuccessful():
+        sys.exit(0)
+    else:
+        sys.exit(1)
+        
