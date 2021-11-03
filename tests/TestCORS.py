@@ -19,6 +19,25 @@ class TestCORS(unittest.TestCase):
         self.assertTrue('Access-Control-Allow-Origin' in response.headers, 'Missing Access-Control-Allow-Origin header from %s' % url)
         self.assertEqual(response.headers['Access-Control-Allow-Origin'],"*", 'Expected header Access-Control-Allow-Origin:* but was Access-Control-Allow-Origin:%s' % (response.headers['Access-Control-Allow-Origin']))
 
+        self.assertEqual(response.headers['Content-Type'],"text/xml", 'Expected header Content-Type: text/xml but was Content-Type: %s' % (response.headers['Content-Type']))
+
+    def test_single_cors(self):
+        url = "%s/%s" % (self.baseurl, 'api/cookbook/recipe/0003-mvm-video/manifest.json')
+
+        response = requests.get(url, allow_redirects=False)
+        code = response.status_code
+        self.assertEqual(code,200, 'Failed to get required json file for CORS testing. Got response %s from URL %s' % (code, url))
+
+        # Check CORS headers
+        count = 0
+        for header in response.headers.keys():
+            if header == 'Access-Control-Allow-Origin':
+                count += 1
+
+        self.assertTrue('Access-Control-Allow-Origin' in response.headers, 'Missing Access-Control-Allow-Origin header from %s' % url)
+        self.assertEqual(response.headers['Access-Control-Allow-Origin'],"*", 'Expected header Access-Control-Allow-Origin:* but was Access-Control-Allow-Origin:%s' % (response.headers['Access-Control-Allow-Origin']))
+
+
 if __name__ == '__main__':
     os.environ["baseurl"] = 'http://localhost:9001'
     unittest.main()

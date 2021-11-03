@@ -27,7 +27,8 @@ jobs:
       - name: Running Proxy
         run:  docker run -d --rm --name proxy -p 9001:80 proxy:latest
 
-        # Due to the way docker-compose and SOLR works we can't access the SOLR cloud
-        # from this machine. Instead we have to run the test within the cluster
+      - name: Wait for Docker Website to start
+        run: .github/bin/waitHttp.sh "http://localhost:9001/"
+
       - name: Run Tests
         run: python ./tests/TestSuite.py
