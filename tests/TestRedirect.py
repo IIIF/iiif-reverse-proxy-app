@@ -96,7 +96,7 @@ class TestRedirect(unittest.TestCase):
 
     def test_slash404(self):
         url = '%s/%s' % (self.baseurl, '/404.html')
-        dest = '%s/%s' % ('https://iiif.io', '404.html')
+        dest = '%s/%s' % ('https://iiif.io', '/404.html')
         self.checkRedirect(url, dest, True)
 
     def test_404(self):
