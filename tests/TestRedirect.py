@@ -15,7 +15,7 @@ class TestRedirect(unittest.TestCase):
         self.baseurl = os.environ["baseurl"]
         self.desturl = os.environ["desturl"]
 
-    def checkRedirect(self, source, target, enforceHost=False):
+    def checkRedirect(self, source, target, enforceHost=False, target_code=302):
         code = 0
         response = requests.get(source, allow_redirects=False)
         code = response.status_code
@@ -23,7 +23,7 @@ class TestRedirect(unittest.TestCase):
         if 'Location' in response.headers:
             location = response.headers['Location']
     #		print(code, location)
-        self.assertEqual(code, 302, 'Failed to get redirected to %s from %s, recieved code: %s' % (target, source, code))
+        self.assertEqual(code, target_code, 'Failed to get redirected to %s from %s, recieved code: %s' % (target, source, code))
         locationPath = urlparse(location).path
         targetPath = urlparse(target).path
         self.assertEqual(locationPath, targetPath, 'Failed to redirect to the correct place. Expected %s but got %s' % (targetPath, locationPath))
@@ -93,6 +93,22 @@ class TestRedirect(unittest.TestCase):
         url = '%s/%s' % (self.baseurl, 'api/annex/notes/editors/index.html')
         dest = '%s/%s' % (self.desturl, 'community/policy/editorial/')
         self.checkRedirect(url, dest)
+
+    def test_slash404(self):
+        url = '%s/%s' % (self.baseurl, '/404.html')
+        dest = '%s/%s' % ('https://iiif.io', '404.html')
+        self.checkRedirect(url, dest, True)
+
+    def test_404(self):
+        url = '%s/%s' % (self.baseurl, '/estste.html')
+        dest = '%s/%s' % ('https://iiif.io', '/404.html')
+        self.checkRedirect(url, dest, True, target_code=301)
+
+    def test_nested404(self):
+        url = '%s/%s' % (self.baseurl, '/estste/setestse')
+        dest = '%s/%s' % ('https://iiif.io', '/404.html')
+        self.checkRedirect(url, dest, True, target_code=301)
+
 
 if __name__ == '__main__':
     baseurl = 'http://localhost:5000'
