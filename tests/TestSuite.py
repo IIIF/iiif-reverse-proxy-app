@@ -11,6 +11,7 @@ import TestPrezi3
 import TestImageAPI
 import TestHttps
 import TestCORS
+import TestsFileSwitch
 import os
 import sys
 
@@ -26,6 +27,7 @@ def suite():
     tests.append(unittest.TestLoader().loadTestsFromTestCase(TestHttps.TestHttps))
     tests.append(unittest.TestLoader().loadTestsFromTestCase(TestImageAPI.TestImageAPI))
     tests.append(unittest.TestLoader().loadTestsFromTestCase(TestCORS.TestCORS))
+    tests.append(unittest.TestLoader().loadTestsFromTestCase(TestsFileSwitch.TestFileSwitch))
     return  unittest.TestSuite(tests)
 
 if __name__ == '__main__':
