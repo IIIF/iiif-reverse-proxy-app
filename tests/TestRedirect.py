@@ -23,7 +23,7 @@ class TestRedirect(unittest.TestCase):
         if 'Location' in response.headers:
             location = response.headers['Location']
     #		print(code, location)
-        self.assertEqual(code, target_code, 'Failed to get redirected to %s from %s, recieved code: %s' % (target, source, code))
+        self.assertEqual(code, target_code, 'Failed to get correct code redirected to %s from %s, recieved code: %s' % (target, source, code))
         locationPath = urlparse(location).path
         targetPath = urlparse(target).path
         self.assertEqual(locationPath, targetPath, 'Failed to redirect to the correct place. Expected %s but got %s' % (targetPath, locationPath))
@@ -109,6 +109,10 @@ class TestRedirect(unittest.TestCase):
         dest = '%s/%s' % ('https://iiif.io', '/404.html')
         self.checkRedirect(url, dest, True, target_code=301)
 
+    def test_sharedCanvas(self):    
+        url = '%s/%s' % (self.baseurl, 'model/shared-canvas/1.0/')
+        dest = '%s/%s' % ('https://iiif.io', 'api/model/shared-canvas/1.0/')
+        self.checkRedirect(url, dest, True, target_code=302)
 
 if __name__ == '__main__':
     baseurl = 'http://localhost:5000'
