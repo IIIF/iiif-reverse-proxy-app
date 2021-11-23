@@ -12,6 +12,7 @@ import TestImageAPI
 import TestHttps
 import TestCORS
 import TestsFileSwitch
+import TestSharedCanvas
 import os
 import sys
 
@@ -28,6 +29,7 @@ def suite():
     tests.append(unittest.TestLoader().loadTestsFromTestCase(TestImageAPI.TestImageAPI))
     tests.append(unittest.TestLoader().loadTestsFromTestCase(TestCORS.TestCORS))
     tests.append(unittest.TestLoader().loadTestsFromTestCase(TestsFileSwitch.TestFileSwitch))
+    tests.append(unittest.TestLoader().loadTestsFromTestCase(TestSharedCanvas.TestSharedCanvas))
     return  unittest.TestSuite(tests)
 
 if __name__ == '__main__':
