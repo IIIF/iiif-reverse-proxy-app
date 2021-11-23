@@ -109,10 +109,18 @@ class TestRedirect(unittest.TestCase):
         dest = '%s/%s' % ('https://iiif.io', '/404.html')
         self.checkRedirect(url, dest, True, target_code=301)
 
+    # 2021 Website move shared-canvas now in the api directory
     def test_sharedCanvas(self):    
         url = '%s/%s' % (self.baseurl, 'model/shared-canvas/1.0/')
         dest = '%s/%s' % ('https://iiif.io', 'api/model/shared-canvas/1.0/')
+        self.checkRedirect(url, dest, True, target_code=301)
+
+    # 2021 Website IIIF logo moved
+    def test_iiiflogo(self):
+        url = '%s/%s' % (self.baseurl, 'img/logo-iiif-34x30.png')
+        dest = '%s/%s' % ('https://iiif.io', 'assets/uploads/logos/logo-iiif-34x30.png')
         self.checkRedirect(url, dest, True, target_code=302)
+
 
 if __name__ == '__main__':
     baseurl = 'http://localhost:5000'
