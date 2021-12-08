@@ -13,6 +13,7 @@ import TestHttps
 import TestCORS
 import TestsFileSwitch
 import TestSharedCanvas
+import TestDomainNames
 import os
 import sys
 
@@ -30,6 +31,7 @@ def suite():
     tests.append(unittest.TestLoader().loadTestsFromTestCase(TestCORS.TestCORS))
     tests.append(unittest.TestLoader().loadTestsFromTestCase(TestsFileSwitch.TestFileSwitch))
     tests.append(unittest.TestLoader().loadTestsFromTestCase(TestSharedCanvas.TestSharedCanvas))
+    tests.append(unittest.TestLoader().loadTestsFromTestCase(TestDomainNames.TestDomainNames))
     return  unittest.TestSuite(tests)
 
 if __name__ == '__main__':
