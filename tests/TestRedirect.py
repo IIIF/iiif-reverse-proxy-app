@@ -77,7 +77,7 @@ class TestRedirect(unittest.TestCase):
         self.checkRedirect(url, dest)
     def test_search(self):
         url = '%s/%s' % (self.baseurl, '/api/search')
-        dest = '%s/%s' % (self.desturl, 'api/search/1.0/')
+        dest = '%s/%s' % (self.desturl, 'api/search/2.0/')
         self.checkRedirect(url, dest)
     def test_api_redirect(self):
         url = '%s/%s' % (self.baseurl, 'api/image/')
