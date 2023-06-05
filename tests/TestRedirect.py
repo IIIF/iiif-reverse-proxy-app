@@ -69,7 +69,7 @@ class TestRedirect(unittest.TestCase):
         self.checkRedirect(url, dest)
     def test_auth(self):
         url = '%s/%s' % (self.baseurl, '/api/auth/')
-        dest = '%s/%s' % (self.desturl, 'api/auth/1.0/')
+        dest = '%s/%s' % (self.desturl, 'api/auth/2.0/')
         self.checkRedirect(url, dest)
     def test_auth0(self):
         url = '%s/%s' % (self.baseurl, '/api/auth/0/')
