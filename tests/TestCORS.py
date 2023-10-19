@@ -8,6 +8,24 @@ class TestCORS(unittest.TestCase):
     def setUp(self):
         self.baseurl = os.environ["baseurl"]
 
+    def test_options_cors(self):
+        url = "%s/%s" % (self.baseurl,'api/cookbook/recipe/0068-newspaper/newspaper_issue_1-manifest.json')    
+        headers = {
+            "Origin": "https://example.com",
+            "Accept": "*/*",
+            "Accept-Encoding": "gzip, deflate, br",
+            "Connection": "keep-alive",
+            "User-Agent": "HTTPie/3.2.1"
+        }
+
+        response = requests.options(url, allow_redirects=False, headers=headers)
+        code = response.status_code
+        self.assertEqual(code,204, 'Failed to get newspaper json file for CORS testing. Got response %s from URL %s\n%s' % (code, url, response.text))
+
+        # Check CORS headers
+        self.assertTrue('Access-Control-Allow-Origin' in response.headers, 'Missing Access-Control-Allow-Origin header from %s' % url)
+        self.assertEqual(response.headers['Access-Control-Allow-Origin'],"*", 'Expected header Access-Control-Allow-Origin:* but was Access-Control-Allow-Origin:%s' % (response.headers['Access-Control-Allow-Origin']))
+
     def test_xml_cors(self):
         url = "%s/%s" % (self.baseurl, 'api/cookbook/recipe/0068-newspaper/newspaper_issue_1-alto_p1.xml')
 
