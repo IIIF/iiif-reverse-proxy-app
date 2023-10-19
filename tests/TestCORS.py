@@ -15,8 +15,7 @@ class TestCORS(unittest.TestCase):
             "Accept": "*/*",
             "Accept-Encoding": "gzip, deflate, br",
             "Connection": "keep-alive",
-            "User-Agent": "HTTPie/3.2.1",
-            "Access-Control-Request-Method": "GET"
+            "User-Agent": "HTTPie/3.2.1"
         }
 
         response = requests.options(url, allow_redirects=False, headers=headers)
