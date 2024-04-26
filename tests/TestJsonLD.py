@@ -30,9 +30,10 @@ class TestJsonLD(unittest.TestCase):
 
 	def test_cookbook_manifest(self):
 		url = '%s/%s' % (self.baseurl, 'api/cookbook/recipe/0057-publishing-v2-and-v3/manifest.json')
+		print (url)
 		with urlopen(url) as urlPointer:
 			manifest = json.loads(urlPointer.read().decode())
-			self.assertEquals(manifest['@context'], 'http://iiif.io/api/presentation/3/context.json', 'Expected default retrieval of manifest to be version 3')
+			self.assertEqual(manifest['@context'], 'http://iiif.io/api/presentation/3/context.json', 'Expected default retrieval of manifest to be version 3')
 
 		opener = request.build_opener()
 		opener.addheaders = [('Accept', "application/ld+json;profile=http://iiif.io/api/presentation/3/context.json")]
