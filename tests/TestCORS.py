@@ -39,6 +39,19 @@ class TestCORS(unittest.TestCase):
 
         self.assertEqual(response.headers['Content-Type'],"text/xml", 'Expected header Content-Type: text/xml but was Content-Type: %s' % (response.headers['Content-Type']))
 
+    def test_vtt_cors(self):
+        url = "%s/%s" % (self.baseurl, 'api/cookbook/recipe/0074-multiple-language-captions/Per_voi_signore_Modelli_francesi_en.vtt')
+
+        response = requests.get(url, allow_redirects=False)
+        code = response.status_code
+        self.assertEqual(code,200, 'Failed to get required vtt file for CORS testing. Got response %s from URL %s' % (code, url))
+
+        # Check CORS headers
+        self.assertTrue('Access-Control-Allow-Origin' in response.headers, 'Missing Access-Control-Allow-Origin header from %s' % url)
+        self.assertEqual(response.headers['Access-Control-Allow-Origin'],"*", 'Expected header Access-Control-Allow-Origin:* but was Access-Control-Allow-Origin:%s' % (response.headers['Access-Control-Allow-Origin']))
+
+        self.assertEqual(response.headers['Content-Type'],"text/vtt", 'Expected header Content-Type: text/vtt but was Content-Type: %s' % (response.headers['Content-Type']))
+
     def test_single_cors(self):
         url = "%s/%s" % (self.baseurl, 'api/cookbook/recipe/0003-mvm-video/manifest.json')
 
