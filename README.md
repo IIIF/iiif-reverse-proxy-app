@@ -16,3 +16,4 @@ Start nginx and run:
 Anything in .ebextensions/nginx/conf.d/ directory is in the http part of the nginx config.
 
 Anything in .ebextensions/nginx/conf.d/elasticbeanstalk is in the default server part of the nginx config. 
+
