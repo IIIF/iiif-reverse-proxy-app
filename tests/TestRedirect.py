@@ -122,6 +122,27 @@ class TestRedirect(unittest.TestCase):
         self.checkRedirect(url, dest, True, target_code=302)
 
 
+    def test_nertherlands(self):
+        # https://iiif.io/event/2026/netherlands/ -> https://conference2026.iiif.io/
+        url = f'{self.baseurl}/event/2026/netherlands/'
+        dest = 'https://conference2026.iiif.io/'
+        self.checkRedirect(url, dest, True, target_code=301)
+
+        # https://iiif.io/event/2026/netherlands/cfp/ -> https://conference2026.iiif.io/cfp/
+        url = f'{self.baseurl}/event/2026/netherlands/cfp/'
+        dest = 'https://conference2026.iiif.io/cfp/'
+        self.checkRedirect(url, dest, True, target_code=301)
+
+        # https://iiif.io/event/2026/netherlands/sponsorship/ -> https://conference2026.iiif.io/sponsors/
+        url = f'{self.baseurl}/event/2026/netherlands/sponsorship/'
+        dest = 'https://conference2026.iiif.io/sponsors/'
+        self.checkRedirect(url, dest, True, target_code=301)
+
+        # https://iiif.io/event/2026/netherlands/scholarship/ -> https://conference2026.iiif.io/travel-scholarship/
+        url = f'{self.baseurl}/event/2026/netherlands/scholarship/'
+        dest = 'https://conference2026.iiif.io/travel-scholarship/'
+        self.checkRedirect(url, dest, True, target_code=301)
+
 if __name__ == '__main__':
     baseurl = 'http://localhost:5000'
     if len(sys.argv) == 2:
